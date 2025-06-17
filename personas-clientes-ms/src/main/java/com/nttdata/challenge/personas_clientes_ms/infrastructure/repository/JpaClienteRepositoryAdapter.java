@@ -22,7 +22,7 @@ public class JpaClienteRepositoryAdapter implements ClienteRepositoryPort {
     }
 
     @Override
-    public Optional<Cliente> obtenerXId(String idCliente) {
+    public Optional<Cliente> obtenerXId(Long idCliente) {
         return repository.findById(idCliente);
     }
 
@@ -32,7 +32,7 @@ public class JpaClienteRepositoryAdapter implements ClienteRepositoryPort {
     }
 
     @Override
-    public void eliminar(String idCliente) {
+    public void eliminar(Long idCliente) {
         repository.deleteById(idCliente);
     }
 

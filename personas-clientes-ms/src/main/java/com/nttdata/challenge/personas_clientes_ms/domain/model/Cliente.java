@@ -10,8 +10,9 @@ import lombok.Setter;
 @Table(name = "clientes")
 public class Cliente extends Persona{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cliente_id", nullable = false)
-    private String idCliente;
+    private Long idCliente;
 
     @Column(nullable = false)
     private String contrasenia;

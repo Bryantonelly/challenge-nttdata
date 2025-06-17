@@ -20,7 +20,7 @@ public class ClienteService {
         return repository.guardar(cliente);
     }
 
-    public Optional<Cliente> obtenerCliente(String clienteId) {
+    public Optional<Cliente> obtenerCliente(Long clienteId) {
         return repository.obtenerXId(clienteId);
     }
 
@@ -28,7 +28,7 @@ public class ClienteService {
         return repository.listar();
     }
 
-    public void eliminarCliente(String clienteId) {
+    public void eliminarCliente(Long clienteId) {
         repository.eliminar(clienteId);
     }
 

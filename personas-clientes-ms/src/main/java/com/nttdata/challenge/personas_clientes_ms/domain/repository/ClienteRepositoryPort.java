@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ClienteRepositoryPort {
     Cliente guardar(Cliente cliente);
-    Optional<Cliente> obtenerXId(String idCliente);
+    Optional<Cliente> obtenerXId(Long idCliente);
     List<Cliente> listar();
-    void eliminar(String idCliente);
+    void eliminar(Long idCliente);
 }

@@ -27,7 +27,7 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClienteDTO> obtener(@PathVariable String id) {
+    public ResponseEntity<ClienteDTO> obtener(@PathVariable Long id) {
         return service.obtenerCliente(id)
                 .map(cliente -> ResponseEntity.ok(ClienteMapper.toDTO(cliente)))
                 .orElse(ResponseEntity.notFound().build());
@@ -41,7 +41,7 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable String id) {
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         service.eliminarCliente(id);
         return ResponseEntity.noContent().build();
     }
