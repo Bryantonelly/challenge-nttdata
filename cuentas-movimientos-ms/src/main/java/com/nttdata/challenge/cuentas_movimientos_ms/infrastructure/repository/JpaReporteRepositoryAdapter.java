@@ -4,7 +4,9 @@ import com.nttdata.challenge.cuentas_movimientos_ms.domain.repository.ReporteRep
 import com.nttdata.challenge.cuentas_movimientos_ms.shared.DTO.ReporteDTO;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +24,7 @@ public class JpaReporteRepositoryAdapter implements ReporteRepositoryPort {
         List<Object[]> resultados = repository.reporte(fechaInicio, fechaFinal);
         return resultados.stream()
                 .map(obj -> new ReporteDTO(
-                        (LocalDate) obj[0],
+                        ((Timestamp) obj[0]).toLocalDateTime(),
                         (String) obj[1],
                         (String) obj[2],
                         (String) obj[3],

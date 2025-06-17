@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface JpaReporteRepository extends JpaRepository<Movimiento, Long> {
 
-    @Query(value = "SELECT m.fecha, u.nombre, c.numeroCuenta, c.tipoCuenta, m.saldoInicial, u.estado, m.valor movimiento, m.saldoDisponible \n" +
+    @Query(value = "SELECT m.fecha, u.nombre, c.numero_cuenta numeroCuenta, c.tipo_cuenta tipoCuenta, m.saldo_inicial saldoInicial, u.estado, m.valor movimiento, m.saldo_disponible saldoDisponible \n" +
             "FROM movimientos m \n" +
             "INNER JOIN cuentas c on m.cuenta_id = c.cuenta_id \n" +
             "INNER JOIN clientes u on u.cliente_id = c.cliente_id \n" +

@@ -4,13 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 
 @Getter
 @Setter
 @AllArgsConstructor
 public class ReporteDTO {
-    private LocalDate fecha;
+    private LocalDateTime fecha;
     private String cliente;
     private String numeroCuenta;
     private String tipo;
