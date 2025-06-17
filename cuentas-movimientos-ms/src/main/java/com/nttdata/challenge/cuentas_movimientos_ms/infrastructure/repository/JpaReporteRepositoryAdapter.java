@@ -6,14 +6,13 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
 public class JpaReporteRepositoryAdapter implements ReporteRepositoryPort {
 
-    private JpaReporteRepository repository;
+    private final JpaReporteRepository repository;
 
     public JpaReporteRepositoryAdapter(JpaReporteRepository repository){
         this.repository = repository;

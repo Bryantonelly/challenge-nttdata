@@ -3,6 +3,7 @@ package com.nttdata.challenge.cuentas_movimientos_ms.application.service;
 import com.nttdata.challenge.cuentas_movimientos_ms.domain.model.Cuenta;
 import com.nttdata.challenge.cuentas_movimientos_ms.domain.model.Movimiento;
 import com.nttdata.challenge.cuentas_movimientos_ms.infrastructure.repository.JpaMovimientoRepositoryAdapter;
+import com.nttdata.challenge.cuentas_movimientos_ms.shared.exception.SaldoInsufienteException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class MovimientoService {
         if(movimiento.getValor() < 0 ){
             movimiento.setTipoMovimiento("RETIRO");
             if(cuentaEncontrada.getSaldoInicial() < Math.abs(movimiento.getValor())){
-                throw new IllegalArgumentException("Saldo no disponible");
+                throw new SaldoInsufienteException("Saldo no disponible");
             }
         }
         movimiento.setSaldoDisponible(cuentaEncontrada.getSaldoInicial() + movimiento.getValor());

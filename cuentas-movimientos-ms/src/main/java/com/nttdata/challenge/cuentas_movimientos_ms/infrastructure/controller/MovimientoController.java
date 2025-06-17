@@ -3,6 +3,7 @@ package com.nttdata.challenge.cuentas_movimientos_ms.infrastructure.controller;
 import com.nttdata.challenge.cuentas_movimientos_ms.application.service.MovimientoService;
 import com.nttdata.challenge.cuentas_movimientos_ms.domain.model.Movimiento;
 import com.nttdata.challenge.cuentas_movimientos_ms.shared.DTO.MovimientoDTO;
+import com.nttdata.challenge.cuentas_movimientos_ms.shared.exception.SaldoInsufienteException;
 import com.nttdata.challenge.cuentas_movimientos_ms.shared.mapper.MovimientoMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class MovimientoController {
         try{
             Movimiento nuevoCliente = service.crearMovimiento(MovimientoMapper.toEntity(clienteDto));
             return ResponseEntity.ok(MovimientoMapper.toDTO(nuevoCliente));
-        } catch (IllegalArgumentException e){
+        } catch (SaldoInsufienteException e){
             return ResponseEntity
                     .badRequest()
                     .body("Error: " + e.getMessage());

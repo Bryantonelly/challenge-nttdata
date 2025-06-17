@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class ReporteService {
 
-    private JpaReporteRepositoryAdapter repository;
+    private final JpaReporteRepositoryAdapter repository;
 
     public ReporteService (JpaReporteRepositoryAdapter repository){
         this.repository = repository;

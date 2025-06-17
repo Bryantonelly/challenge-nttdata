@@ -3,6 +3,7 @@ package com.nttdata.challenge.cuentas_movimientos_ms.infrastructure.controller;
 import com.nttdata.challenge.cuentas_movimientos_ms.application.service.CuentaService;
 import com.nttdata.challenge.cuentas_movimientos_ms.domain.model.Cuenta;
 import com.nttdata.challenge.cuentas_movimientos_ms.shared.DTO.CuentaDTO;
+import com.nttdata.challenge.cuentas_movimientos_ms.shared.exception.UsuarioNoEncontradoException;
 import com.nttdata.challenge.cuentas_movimientos_ms.shared.mapper.CuentaMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +22,15 @@ public class CuentaController {
     }
 
     @PostMapping
-    public ResponseEntity<CuentaDTO> crear(@RequestBody CuentaDTO clienteDto) {
-        Cuenta nuevoCliente = service.crearCuenta(CuentaMapper.toEntity(clienteDto));
-        return ResponseEntity.ok(CuentaMapper.toDTO(nuevoCliente));
+    public ResponseEntity<?> crear(@RequestBody CuentaDTO clienteDto) {
+        try{
+            Cuenta nuevoCliente = service.crearCuenta(CuentaMapper.toEntity(clienteDto));
+            return ResponseEntity.ok(CuentaMapper.toDTO(nuevoCliente));
+        } catch (UsuarioNoEncontradoException e){
+            return ResponseEntity
+                    .badRequest()
+                    .body("Error: " + e.getMessage());
+        }
     }
 
     @GetMapping("/{id}")
