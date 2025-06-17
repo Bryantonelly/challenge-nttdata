@@ -15,8 +15,9 @@ import java.util.List;
 @Table(name = "cuentas")
 public class Cuenta {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cuenta_id", nullable = false)
-    private String idCuenta;
+    private Long idCuenta;
     @Column(nullable = false)
     private String numeroCuenta;
     @Column(nullable = false)
@@ -27,5 +28,5 @@ public class Cuenta {
     private Boolean estado;
 
     @Column(name = "cliente_id", nullable = false)
-    private String idCliente;
+    private Long idCliente;
 }

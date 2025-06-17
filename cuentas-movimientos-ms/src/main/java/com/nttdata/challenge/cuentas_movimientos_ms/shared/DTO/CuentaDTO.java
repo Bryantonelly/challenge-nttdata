@@ -6,10 +6,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CuentaDTO {
-    private String idCuenta;
+    private Long idCuenta;
     private String numeroCuenta;
     private String tipoCuenta;
     private Double saldoInicial;
     private Boolean estado;
-    private String idCliente;
+    private Long idCliente;
 }

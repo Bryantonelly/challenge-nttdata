@@ -12,16 +12,31 @@ import java.util.Optional;
 public class MovimientoService {
 
     private final JpaMovimientoRepositoryAdapter repository;
+    private final CuentaService serviceCuenta;
 
-    public MovimientoService(JpaMovimientoRepositoryAdapter repository){
+    public MovimientoService(JpaMovimientoRepositoryAdapter repository, CuentaService serviceCuenta){
         this.repository = repository;
+        this.serviceCuenta = serviceCuenta;
     }
 
     public Movimiento crearMovimiento(Movimiento movimiento) {
+        Cuenta cuentaEncontrada = serviceCuenta.obtenerCuenta(movimiento.getIdCuenta()).orElseThrow(()-> new RuntimeException("Cuenta no encontrada"));
+        movimiento.setTipoMovimiento("DEPOSITO");
+        if(movimiento.getValor() < 0 ){
+            movimiento.setTipoMovimiento("RETIRO");
+            if(cuentaEncontrada.getSaldoInicial() < Math.abs(movimiento.getValor())){
+                throw new IllegalArgumentException("Saldo no disponible");
+            }
+        }
+        movimiento.setSaldoDisponible(cuentaEncontrada.getSaldoInicial() + movimiento.getValor());
+        movimiento.setSaldoInicial(cuentaEncontrada.getSaldoInicial());
+
+        cuentaEncontrada.setSaldoInicial(cuentaEncontrada.getSaldoInicial() + movimiento.getValor());
+        serviceCuenta.actualizarCuenta(cuentaEncontrada);
         return repository.guardar(movimiento);
     }
 
-    public Optional<Movimiento> obtenerMovimiento(String movimientoId) {
+    public Optional<Movimiento> obtenerMovimiento(Long movimientoId) {
         return repository.obtenerXId(movimientoId);
     }
 
@@ -29,7 +44,7 @@ public class MovimientoService {
         return repository.listar();
     }
 
-    public void eliminarMovimiento(String movimientoId) {
+    public void eliminarMovimiento(Long movimientoId) {
         repository.eliminar(movimientoId);
     }
 
@@ -39,7 +54,9 @@ public class MovimientoService {
                     movimientoEncontrado.setTipoMovimiento(movimiento.getTipoMovimiento());
                     movimientoEncontrado.setFecha(movimiento.getFecha());
                     movimientoEncontrado.setValor(movimiento.getValor());
-                    movimientoEncontrado.setSaldo(movimiento.getSaldo());
+                    movimientoEncontrado.setSaldoInicial(movimiento.getSaldoInicial());
+                    movimientoEncontrado.setSaldoDisponible(movimiento.getSaldoDisponible());
+                    movimientoEncontrado.setIdCuenta(movimiento.getIdCuenta());
                     return repository.guardar(movimientoEncontrado);
                 } ).orElseThrow(()-> new RuntimeException("Movimiento no encontrado"));
     }

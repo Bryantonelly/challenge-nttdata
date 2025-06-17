@@ -17,12 +17,12 @@ public class JpaCuentaRepositoryAdapter implements CuentaRepositoryPort {
     }
 
     @Override
-    public Cuenta guardar(Cuenta Cuenta) {
-        return repository.save(Cuenta);
+    public Cuenta guardar(Cuenta cuenta) {
+        return repository.save(cuenta);
     }
 
     @Override
-    public Optional<Cuenta> obtenerXId(String idCuenta) {
+    public Optional<Cuenta> obtenerXId(Long idCuenta) {
         return repository.findById(idCuenta);
     }
 
@@ -32,7 +32,7 @@ public class JpaCuentaRepositoryAdapter implements CuentaRepositoryPort {
     }
 
     @Override
-    public void eliminar(String idCuenta) {
+    public void eliminar(Long idCuenta) {
         repository.deleteById(idCuenta);
     }
 }

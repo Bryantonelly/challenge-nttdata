@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface CuentaRepositoryPort {
     Cuenta guardar(Cuenta cuenta);
-    Optional<Cuenta> obtenerXId(String idCuenta);
+    Optional<Cuenta> obtenerXId(Long idCuenta);
     List<Cuenta> listar();
-    void eliminar(String idCuenta);
+    void eliminar(Long idCuenta);
 }

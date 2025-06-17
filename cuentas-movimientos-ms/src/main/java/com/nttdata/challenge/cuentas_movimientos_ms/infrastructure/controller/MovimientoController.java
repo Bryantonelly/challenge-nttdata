@@ -21,13 +21,20 @@ public class MovimientoController {
     }
 
     @PostMapping
-    public ResponseEntity<MovimientoDTO> crear(@RequestBody MovimientoDTO clienteDto) {
-        Movimiento nuevoCliente = service.crearMovimiento(MovimientoMapper.toEntity(clienteDto));
-        return ResponseEntity.ok(MovimientoMapper.toDTO(nuevoCliente));
+    public ResponseEntity<?> crear(@RequestBody MovimientoDTO clienteDto) {
+        try{
+            Movimiento nuevoCliente = service.crearMovimiento(MovimientoMapper.toEntity(clienteDto));
+            return ResponseEntity.ok(MovimientoMapper.toDTO(nuevoCliente));
+        } catch (IllegalArgumentException e){
+            return ResponseEntity
+                    .badRequest()
+                    .body("Error: " + e.getMessage());
+        }
+
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovimientoDTO> obtener(@PathVariable String id) {
+    public ResponseEntity<MovimientoDTO> obtener(@PathVariable Long id) {
         return service.obtenerMovimiento(id)
                 .map(cliente -> ResponseEntity.ok(MovimientoMapper.toDTO(cliente)))
                 .orElse(ResponseEntity.notFound().build());
@@ -41,14 +48,14 @@ public class MovimientoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable String id) {
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         service.eliminarMovimiento(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping
-    public ResponseEntity<MovimientoDTO> actualizar(@RequestBody MovimientoDTO cuentaDto) {
-        Movimiento cuentaActualizado = service.actualizarMovimiento(MovimientoMapper.toEntity(cuentaDto));
-        return ResponseEntity.ok(MovimientoMapper.toDTO(cuentaActualizado));
+    public ResponseEntity<MovimientoDTO> actualizar(@RequestBody MovimientoDTO movimientoDto) {
+        Movimiento movimientoActualizado = service.actualizarMovimiento(MovimientoMapper.toEntity(movimientoDto));
+        return ResponseEntity.ok(MovimientoMapper.toDTO(movimientoActualizado));
     }
 }

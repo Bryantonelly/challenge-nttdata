@@ -8,10 +8,11 @@ import java.util.Date;
 @Getter
 @Setter
 public class MovimientoDTO {
-    private String idMovimiento;
+    private Long idMovimiento;
     private Date fecha;
     private String tipoMovimiento;
-    private String valor;
-    private Double saldo;
-    private String idCuenta;
+    private Double valor;
+    private Double saldoInicial;
+    private Double saldoDisponible;
+    private Long idCuenta;
 }

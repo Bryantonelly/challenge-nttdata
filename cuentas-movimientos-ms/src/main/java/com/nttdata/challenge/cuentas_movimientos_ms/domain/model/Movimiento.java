@@ -12,17 +12,20 @@ import java.util.Date;
 @Table(name = "movimientos")
 public class Movimiento {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "movimiento_id", nullable = false)
-    private String idMovimiento;
+    private Long idMovimiento;
     @Column(nullable = false)
     private Date fecha;
     @Column(nullable = false)
     private String tipoMovimiento;
     @Column(nullable = false)
-    private String valor;
+    private Double valor;
     @Column(nullable = false)
-    private Double saldo;
+    private Double saldoDisponible;
+    @Column(nullable = false)
+    private Double saldoInicial;
 
     @Column(name = "cuenta_id")
-    private String idCuenta;
+    private Long idCuenta;
 }

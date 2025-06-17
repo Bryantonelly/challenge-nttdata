@@ -22,7 +22,7 @@ public class JpaMovimientoRepositoryAdapter implements MovimientoRepositoryPort 
     }
 
     @Override
-    public Optional<Movimiento> obtenerXId(String idMovimiento) {
+    public Optional<Movimiento> obtenerXId(Long idMovimiento) {
         return repository.findById(idMovimiento);
     }
 
@@ -32,7 +32,7 @@ public class JpaMovimientoRepositoryAdapter implements MovimientoRepositoryPort 
     }
 
     @Override
-    public void eliminar(String idMovimiento) {
+    public void eliminar(Long idMovimiento) {
         repository.deleteById(idMovimiento);
     }
 }

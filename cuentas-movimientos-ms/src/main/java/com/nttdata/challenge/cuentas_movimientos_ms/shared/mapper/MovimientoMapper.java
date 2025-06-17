@@ -12,7 +12,8 @@ public class MovimientoMapper {
         dto.setTipoMovimiento(movimiento.getTipoMovimiento());
         dto.setFecha(movimiento.getFecha());
         dto.setValor(movimiento.getValor());
-        dto.setSaldo(movimiento.getSaldo());
+        dto.setSaldoInicial(movimiento.getSaldoInicial());
+        dto.setSaldoDisponible(movimiento.getSaldoDisponible());
         dto.setIdCuenta(movimiento.getIdCuenta());
         return dto;
     }
@@ -23,7 +24,8 @@ public class MovimientoMapper {
         movimiento.setTipoMovimiento(dto.getTipoMovimiento());
         movimiento.setFecha(dto.getFecha());
         movimiento.setValor(dto.getValor());
-        movimiento.setSaldo(dto.getSaldo());
+        movimiento.setSaldoInicial(dto.getSaldoInicial());
+        movimiento.setSaldoDisponible(dto.getSaldoDisponible());
         movimiento.setIdCuenta(dto.getIdCuenta());
         return movimiento;
     }

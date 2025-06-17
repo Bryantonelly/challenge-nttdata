@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface MovimientoRepositoryPort {
     Movimiento guardar(Movimiento Movimiento);
-    Optional<Movimiento> obtenerXId(String idMovimiento);
+    Optional<Movimiento> obtenerXId(Long idMovimiento);
     List<Movimiento> listar();
-    void eliminar(String idMovimiento);
+    void eliminar(Long idMovimiento);
 }

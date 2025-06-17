@@ -20,7 +20,7 @@ public class CuentaService {
         return repository.guardar(Cuenta);
     }
 
-    public Optional<Cuenta> obtenerCuenta(String CuentaId) {
+    public Optional<Cuenta> obtenerCuenta(Long CuentaId) {
         return repository.obtenerXId(CuentaId);
     }
 
@@ -28,18 +28,18 @@ public class CuentaService {
         return repository.listar();
     }
 
-    public void eliminarCuenta(String CuentaId) {
+    public void eliminarCuenta(Long CuentaId) {
         repository.eliminar(CuentaId);
     }
 
-    public Cuenta actualizarCuenta(Cuenta Cuenta) {
-        return repository.obtenerXId(Cuenta.getIdCuenta()).map(
-                CuentaEncontrado -> {
-                    CuentaEncontrado.setNumeroCuenta(Cuenta.getNumeroCuenta());
-                    CuentaEncontrado.setTipoCuenta(Cuenta.getTipoCuenta());
-                    CuentaEncontrado.setSaldoInicial(Cuenta.getSaldoInicial());
-                    CuentaEncontrado.setEstado(Cuenta.getEstado());
-                    return repository.guardar(CuentaEncontrado);
+    public Cuenta actualizarCuenta(Cuenta cuenta) {
+        return repository.obtenerXId(cuenta.getIdCuenta()).map(
+                cuentaEncontrado -> {
+                    cuentaEncontrado.setNumeroCuenta(cuenta.getNumeroCuenta());
+                    cuentaEncontrado.setTipoCuenta(cuenta.getTipoCuenta());
+                    cuentaEncontrado.setSaldoInicial(cuenta.getSaldoInicial());
+                    cuentaEncontrado.setEstado(cuenta.getEstado());
+                    return repository.guardar(cuentaEncontrado);
                 } ).orElseThrow(()-> new RuntimeException("Cuenta no encontrada"));
 
     }
